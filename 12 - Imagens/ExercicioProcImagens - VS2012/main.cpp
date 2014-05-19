@@ -1,26 +1,26 @@
-#include "ImagemPNM.h"
-
 #include <cstdlib>
-#include<iostream>
+#include <iostream>
+#include <time.h>
+
 #include <GL/glut.h>
-#include<time.h>
+#include "ImagemPNM.h"
 
 using namespace std;
 
-int altura=400, largura=400; //valores iniciais, caso não leia nenhuma imagem
+int altura=400, largura=400;  // valores iniciais, caso não leia nenhuma imagem
 
-float alturaOrtho=100, larguraOrtho=100; //camera ortográfica
+float alturaOrtho=100, larguraOrtho=100; // camera ortográfica
 
-ImagemPNM imagem;
+ImagemPNM imagemPNM;
 
 void DesenhaImagem(Imagem *imagem)
 {
 	if(imagem != NULL){
-	// Use Window coordinates to set raster position (em 0, 0) --> Canto inferior esquerdo!!!!
-	glRasterPos2i(0, 0);
-	cout << "res " << imagem->getWidth() <<" x " << imagem->getHeight() << "\n";
-	// Draw the pixmap
-	glDrawPixels(imagem->getWidth(), imagem->getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, imagem->getPixels());
+		// Use Window coordinates to set raster position (em 0, 0) --> Canto inferior esquerdo!!!!
+		glRasterPos2i(0, 0);
+		cout << "res " << imagem->getWidth() <<" x " << imagem->getHeight() << "\n";
+		// Draw the pixmap
+		glDrawPixels(imagem->getWidth(), imagem->getHeight(), GL_RGBA, GL_UNSIGNED_BYTE, imagem->getPixels());
 	}
 }
 
@@ -33,7 +33,6 @@ void AjustaJanela(int w, int h){
 	largura = w;
 	altura= h;
 
-     
 	// Reset the coordinate system before modifying
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -53,7 +52,7 @@ void Desenha(void)
 	glClearColor(1,1,1,0);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	DesenhaImagem(imagem.RetornaImagem());
+	DesenhaImagem(imagemPNM.RetornaImagem());
 	
 	//Executa os comandos OpenGL 
 	glFlush();
@@ -77,6 +76,7 @@ void Inicializa(void)
 	glMatrixMode(GL_MODELVIEW);
 }
 
+
 Imagem *GeraImagemAleatoria(){
 
 	Imagem *image;
@@ -96,26 +96,25 @@ Imagem *GeraImagemAleatoria(){
 	return image;
 }
 
+
 // Programa Principal 
 int main(void)
 {
-
-	//Lê um PPM modo texto
-	imagem.LePNM("mario.ppm");
-	//imagem.TransformaMarioEmLuigi();
-	
-	//Cria uma imagem "aleatória"
+	// 1 - Cria uma imagem "aleatória"
 	//Imagem *novaImagem;
 	//novaImagem = GeraImagemAleatoria();
-	//imagem.RecebeImagem(novaImagem,altura,largura);
+	//imagemPNM.RecebeImagem(novaImagem, altura, largura);
+
+	// 2 - Lê um PPM modo texto
+	//imagemPNM.LePNM("mario.ppm");
 
 	// Define do modo de operação da GLUT
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
  
 	// Especifica o tamanho inicial em pixels da janela GLUT
-	altura = imagem.RetornaAltura();
-	largura = imagem.RetornaLargura();
-	glutInitWindowSize(largura,altura); 
+	altura = imagemPNM.RetornaAltura();
+	largura = imagemPNM.RetornaLargura();
+	glutInitWindowSize(largura, altura); 
  
 	// Cria a janela passando como argumento o título da mesma
 	glutCreateWindow("Processando Imagens");
@@ -132,11 +131,6 @@ int main(void)
 	// Chama a função responsável por fazer as inicializações 
 	Inicializa();
 
-	imagem.CriaPNM("novaImagem.ppm");
-	
-	//Função que gera uma imagem aleatoria
-	//imagem.RecebeImagem(GeraImagemAleatoria());
- 
 	// Inicia o processamento e aguarda interações do usuário
 	glutMainLoop();
  
