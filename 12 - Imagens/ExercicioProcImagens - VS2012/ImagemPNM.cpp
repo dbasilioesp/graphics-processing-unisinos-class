@@ -14,11 +14,11 @@ void ImagemPNM::LePNM(char *nomeDoArquivo)
 	 // Tenta abrir o arquivo...
     ifstream input(nomeDoArquivo, ios::in);
     if (!input) {
-        cerr << "Arquivo "<< nomeDoArquivo << " não pode ser aberto!\n";
+        cerr << "Arquivo "<< nomeDoArquivo << " nï¿½o pode ser aberto!\n";
         exit(1);
     }
 
-    // Cabeçalho, considerando este formato:
+    // Cabeï¿½alho, considerando este formato:
     // Px
     // # comentario
     // Width Height
@@ -26,7 +26,7 @@ void ImagemPNM::LePNM(char *nomeDoArquivo)
 
    char buffer[BUFF_SIZE];
    input.getline(buffer,BUFF_SIZE); //pega a linha com o Px
-   input.getline(buffer,BUFF_SIZE); //pega a linha com o comentário
+   input.getline(buffer,BUFF_SIZE); //pega a linha com o comentï¿½rio
 
     // Pega a altura e a largura
    input >> largura;
@@ -36,11 +36,11 @@ void ImagemPNM::LePNM(char *nomeDoArquivo)
    imagem = new Imagem(largura,altura);
 
    int max;
-   input >> max; //pega o MAX GREY (que pra nós não precisa agora)
+   input >> max; //pega o MAX GREY (que pra nï¿½s nï¿½o precisa agora)
 
    int x=0, y=altura;
 
-   // Percorre os pixels -- lê o y invertido para desenhar certo depois com o glDrawPixels
+   // Percorre os pixels -- lï¿½ o y invertido para desenhar certo depois com o glDrawPixels
    for(int y = altura-1; y >= 0; y--)
 	   for (int x = 0; x < largura; x++)
 	   {
@@ -52,9 +52,10 @@ void ImagemPNM::LePNM(char *nomeDoArquivo)
 			
 			if (r == 255 && g == 0 && b == 255)
 				a = 0;
-			else a = 255;
+			else 
+			    a = 255;
+			    
 			int rgb = (a << 24) | (b << 16) | (g << 8) | r;
-			//int rgb = (a << 24) | (r << 16) | (g << 8) | b;
 			imagem->setRGB(x, y, rgb);
 	   }
 	cout << "Leitura realizada com sucesso! \n";
@@ -65,7 +66,7 @@ void ImagemPNM::CriaPNM(char *nomeDoArquivo)
 	ofstream arq(nomeDoArquivo, ios::out | ios::binary);
 
     arq << "P3" << endl;
-	arq << "# Criado na aula de Processamento Gráfico ;)" << endl;
+	arq << "# Criado na aula de Processamento Grï¿½fico ;)" << endl;
     arq << largura << " " << altura << endl;
     arq << 255 << endl;
 
