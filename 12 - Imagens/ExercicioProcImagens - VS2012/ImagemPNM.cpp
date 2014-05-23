@@ -70,8 +70,8 @@ void ImagemPNM::CriaPNM(char *nomeDoArquivo)
     arq << largura << " " << altura << endl;
     arq << 255 << endl;
 
-	for(int i=0; i<altura; i++)
-		for(int j=0;  j<largura; j++) {
+	for(int i = altura-1; i >= 0; i--)
+	   for (int j = 0; j < largura; j++) {
 			int pixel = imagem->getRGB(j,i);
 			int b = (pixel >> 16) & 255;
 			int g = (pixel >> 8) & 255;
