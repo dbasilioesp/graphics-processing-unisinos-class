@@ -131,7 +131,8 @@ int main(void)
 	//imagemPNM.TransformaMarioEmLuigi();
 	//imagemPNM.ConverteGrayscale();
 	//imagemPNM.Coloriza(100, 100, 120);
-	imagemPNM.Inverte();
+	//imagemPNM.Inverte();
+	imagemPNM.Binariza(127);
 
 	// Define do modo de operação da GLUT
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 

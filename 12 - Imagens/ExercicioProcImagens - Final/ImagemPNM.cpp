@@ -162,3 +162,28 @@ void ImagemPNM::Inverte(){
 		}
 
 }
+
+
+void ImagemPNM::Binariza(int cutPoint){
+
+	ConverteGrayscale();
+
+	for(int i=0; i < altura; i++)
+		for(int j=0;  j < largura; j++) {
+			int pixel = imagem->getRGB(j,i);
+			int b = (pixel >> 16) & 255;
+			int g = (pixel >> 8) & 255;
+			int r = (pixel) & 255;
+
+			if(r <= cutPoint){
+				r = g = b = 0;
+			} else {
+				r = g = b = 255;
+			}
+
+			pixel = (b << 16) | (g << 8) | r;
+			imagem->setRGB(j, i, pixel);
+
+		}
+
+}
