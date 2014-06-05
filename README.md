@@ -25,7 +25,10 @@ Link para download:
 
     http://www.koalastothemax.com/
 
+## Isometria
 
+    http://www.di.ufpe.br/~ejtsr/Forge16V/Disserta%E7%E3o%20de%20Mestrado.pdf
+    
 ## Referencias Bibliográfia
 
 1. WRIGHT Jr., Richard S.; LIPCHAK, Benjamin; HAEMEL, Nicholas. OpenGL Superbible: Comprehensive Tutorial and Reference. 4ed.: Addison-Wesley. 2007.
