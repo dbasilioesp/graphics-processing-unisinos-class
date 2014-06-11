@@ -17,17 +17,17 @@ Email: fellowsheep@gmail.com
 
 Link para download:
 
-    [http://portableapps.com/apps/graphics_pictures/irfanview_portable](http://portableapps.com/apps/graphics_pictures/irfanview_portable)
+* [http://portableapps.com/apps/graphics_pictures/irfanview_portable](http://portableapps.com/apps/graphics_pictures/irfanview_portable)
 
 ## Demos
 
 #### Coala
 
-    [http://www.koalastothemax.com/](http://www.koalastothemax.com/)
+* [http://www.koalastothemax.com/](http://www.koalastothemax.com/)
 
 ## Isometria
 
-    [Dissertação Mestrado](http://www.di.ufpe.br/~ejtsr/Forge16V/Disserta%E7%E3o%20de%20Mestrado.pdf)
+* [Dissertação Mestrado](http://www.di.ufpe.br/~ejtsr/Forge16V/Disserta%E7%E3o%20de%20Mestrado.pdf)
     
 ## Referencias Bibliográfia
 
