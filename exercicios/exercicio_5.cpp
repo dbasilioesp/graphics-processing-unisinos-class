@@ -1,4 +1,4 @@
-//// Author: David Basilio Espitalher - dbasilioesp@gmail.com
+// Author: David Basilio Espitalher - dbasilioesp@gmail.com
 
 #include <stdlib.h>
 #include <GL/glut.h>
