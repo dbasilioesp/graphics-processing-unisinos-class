@@ -7,7 +7,7 @@ Professora: Rossana Baptista Queiroz
 
 Email: fellowsheep@gmail.com
 
-## Requisites
+## Requisitos
 
 #### GLUT
 
@@ -19,9 +19,11 @@ Link para download:
 
 * [http://portableapps.com/apps/graphics_pictures/irfanview_portable](http://portableapps.com/apps/graphics_pictures/irfanview_portable)
 
-## Demos
+## Tutoriais
 
-#### Coala
+* [Basic of Computer Graphic](http://cs.wellesley.edu/~cs110s08/lectures/M01-color/graphics.pdf)
+
+## Demos
 
 * [http://www.koalastothemax.com/](http://www.koalastothemax.com/)
 
