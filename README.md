@@ -1,5 +1,5 @@
-Graphic Processing
-==================
+Processamento Gráfico
+=====================
 
 *Graphic Processing é o material de aula do curso Jogos Digitais da Unisinos lessionado pela professora Rossana.*
 
