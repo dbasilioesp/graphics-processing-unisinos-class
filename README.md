@@ -11,7 +11,7 @@ Email: fellowsheep@gmail.com
 
 #### GLUT
 
-Glut é um kit de ferramentas (toolkit) para sistema independentes windows para escrever programas OpenGL.
+Glut é um kit de ferramentas (toolkit) para sistema independentes windows para escrever programas OpenGL.  
 Faça download da biblioteca Glut pelo arquivo GLUT.zip dentro do diretório [Glut](https://github.com/dbasilioesp/Processamento-Grafico-Unisinos/tree/master/Glut).  
 Ao dezipar copie a pasta GLUT para o caminho **"C:\"**.
 
