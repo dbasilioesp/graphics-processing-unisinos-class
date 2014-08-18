@@ -1,7 +1,7 @@
 Processamento Gráfico
 =====================
 
-*Graphic Processing é o material de aula do curso Jogos Digitais da Unisinos lessionado pela professora Rossana.*
+*Processamento Gráfico é o material de aula do curso Jogos Digitais da Unisinos lessionado pela professora Rossana.*
 
 Professora: Rossana Baptista Queiroz
 
@@ -11,13 +11,14 @@ Email: fellowsheep@gmail.com
 
 #### GLUT
 
-É necessário fazer download da biblioteca GLUT disponível no moodle da Unisinos.
+Glut é um kit de ferramentas (toolkit) para sistema independentes windows para escrever programas OpenGL.
+Faça download da biblioteca Glut pelo arquivo GLUT.zip dentro do diretório [Glut](https://github.com/dbasilioesp/Processamento-Grafico-Unisinos/tree/master/Glut).  
+Ao dezipar copie a pasta GLUT para o caminho **"C:\"**.
 
 #### Infraview Portable
 
-Link para download:
-
-* [http://portableapps.com/apps/graphics_pictures/irfanview_portable](http://portableapps.com/apps/graphics_pictures/irfanview_portable)
+Intraview é um visor gráfico para alterar as extensões das imagens, como PNM.  
+Link para download: [http://portableapps.com/apps/graphics_pictures/irfanview_portable](http://portableapps.com/apps/graphics_pictures/irfanview_portable)
 
 ## Tutoriais
 
