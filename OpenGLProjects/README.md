@@ -5,5 +5,8 @@ Esta é uma Solution do Visual Studio com todos projetos separados e prontos par
 
 ## Requisitos
 
-* **Visual Studio 2012**: Esta Solution utiliza a versão 2012 do Visual Studio.
-* **Glut**: Para rodar os projetos é preciso ter no caminho "C:\" a biblioteca GLUT copiada e na pasta Debug desta Solution a dll **glut32.dll** copiada. O arquivo glut32.dll você pode encontrar na pasta GLUT.
+* __Visual Studio 2012__: Esta Solution utiliza a versão 2012 do Visual Studio.
+* __Glut__: 
+    * Faça download da [GLUT](https://github.com/dbasilioesp/Processamento-Grafico-Unisinos/blob/master/Glut/GLUT.zip).
+    * Descompact e copie para esta Solution.
+    * Dentro da pasta GLUT copie o arquivo __glut32.dll__ para a pasta Debug da Solution. Isso permitirá executar os projetos da Solution.
