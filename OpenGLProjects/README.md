@@ -1,4 +1,4 @@
-Solution Projects
+OpenGL Projects
 =================
 
 Esta é uma Solution do Visual Studio com todos projetos separados e prontos para rodar sozinho.  
