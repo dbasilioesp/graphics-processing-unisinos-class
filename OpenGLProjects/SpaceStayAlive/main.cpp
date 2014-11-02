@@ -1,17 +1,18 @@
-/*
-	Author: David Basilio Espitalher
-*/
+//*****************************************************
+//
+// Author: David Basilio Espitalher
+// 
+//*****************************************************
 
 #include <stdlib.h>
 #include <iostream>
 #include <time.h>
 #include <vector>
 #include <GL/glut.h>
+
 #include "structs.cpp"
 
-
 using namespace std;
-
 
 const GLsizei WINDOW_WIDTH = 720;
 const GLsizei WINDOW_HEIGHT = 480;
@@ -28,6 +29,7 @@ float slice = (2 * PI) / 100.0;
 bool stateGoalReached = false;
 bool stateInitialAnimation = true;
 bool goalCreated = false;
+bool enemiesCreated = false;
 int timeline = 0;
 int deltatime = 0;
 int lasttime = 0;
@@ -36,6 +38,12 @@ Star * stars;
 Spaceship * spaceshipPlayer;
 Goal * goal;
 vector<Spaceship> spaceshipEnemies;
+
+
+int GetDeltatime()
+{
+	return (clock() - lasttime) / 1000;
+}
 
 
 void DrawSquare(float x, float y, float width, float height)
@@ -81,13 +89,13 @@ void CreateStars()
 		speed = rand() % 1000;
 
 		if(speed < 100){
-			stars[i].speed = 0.005;
+			stars[i].speed = 0.5;
 		}else if(speed < 800){
-			stars[i].speed = 0.01;
+			stars[i].speed = 1;
 		}else if(speed < 950) {
-			stars[i].speed = 0.02;
+			stars[i].speed = 2;
 		}else {
-			stars[i].speed = 0.025;
+			stars[i].speed = 2.5;
 		}
 
 		stars[i].size = 5;
@@ -102,7 +110,7 @@ Spaceship * CreateSpaceship(Spaceship * spaceship)
 	spaceship->height = 22;
 	spaceship->x = 100;
 	spaceship->y = WINDOW_HEIGHT / 2 - (spaceship->height / 2);
-	spaceship->speed = 2;
+	spaceship->speed = 8;
 	spaceship->distanceFromBegin = 0;
 
 	return spaceship;
@@ -147,8 +155,8 @@ void CreateGoal()
 	goal->x = WINDOW_WIDTH + goal->width;
 	goal->y = WINDOW_HEIGHT/2;
 	goal->angle = 0.0;
-	goal->angleSpeed = 0.1;
-	goal->moveSpeed = 0.01;
+	goal->angleSpeed = 1;
+	goal->moveSpeed = 1;
 }
 
 
@@ -156,10 +164,11 @@ void ResetGame()
 {
 	stateGoalReached = false;
 	goalCreated = false;
+	enemiesCreated = false;
 
 	timeline = 0;
 	deltatime = 0;
-	lasttime = 0;
+	lasttime = clock();
 
 	delete stars;
 	delete spaceshipPlayer;
@@ -175,14 +184,14 @@ void ResetGame()
 void StarsGotoLightSpeed()
 {
 	for (int i = 0; i < STARS_NUMBER; i++)
-		stars[i].speed += 0.5;
+		stars[i].speed += 20;
 }
 
 
 void StarsBackNormalSpeed()
 {
 	for (int i = 0; i < STARS_NUMBER; i++)
-		stars[i].speed -= 0.5;
+		stars[i].speed -= 20;
 }
 
 
@@ -200,7 +209,7 @@ void CollisionGoal()
 			stateGoalReached == false){
 
 			stateGoalReached = true;
-			lasttime = timeline;
+			lasttime = clock();
 
 			StarsGotoLightSpeed();
 
@@ -261,7 +270,7 @@ void DrawSpaceship(Spaceship * spaceship)
 void DrawGoal()
 {
 	glPushMatrix();
-		glTranslatef(goal->x, goal->y, 0.0);
+		glTranslatef(goal->x + 0.5, goal->y, 0.0);
 		glRotatef(goal->angle, 0.0f, 0.0f, 1.0f);
 		glColor3ub(230, 230, 0);
 		DrawSquare(0, 0, goal->width, goal->height);
@@ -317,15 +326,16 @@ void UpdateKeyEnemies(unsigned char key = ' ')
 
 void UpdateSpaceshipPlayer()
 {
+
+	deltatime = GetDeltatime();
+
 	if(stateGoalReached == true){
-
-		deltatime = timeline - lasttime;
-
-		if(deltatime < 10000){
-			spaceshipPlayer->x -= 0.01;
+		cout << deltatime << endl;
+		if(deltatime < 2){
+			spaceshipPlayer->x -= 1;
 		}
-		else if(deltatime < 20000) {
-			spaceshipPlayer->x += 0.1;
+		else if(deltatime < 4) {
+			spaceshipPlayer->x += 15;
 		}
 		else {
 			ResetGame();
@@ -336,17 +346,16 @@ void UpdateSpaceshipPlayer()
 	}
 
 	if(stateInitialAnimation == true){
-		
-		if(timeline < 2000){
-			
-		} else if(timeline < 8000){
-			spaceshipPlayer->x += 0.05;
+	
+		if(deltatime > 1 && deltatime < 4){
+			spaceshipPlayer->x += 7;
 		}
-		else if(timeline < 15000) {
-			spaceshipPlayer->x -= 0.005;
+		else if(deltatime < 5) {
+			spaceshipPlayer->x -= 2;
 		}
 		else {
 			StarsBackNormalSpeed();
+			
 			stateInitialAnimation = false;
 		}
 	}
@@ -356,23 +365,17 @@ void UpdateSpaceshipPlayer()
 
 void UpdateEnemies()
 {
-	int i = 0;
-	vector<int> positions;
-
-	for(vector<Spaceship>::iterator enemy = spaceshipEnemies.begin(); enemy != spaceshipEnemies.end(); enemy++)
+	vector<Spaceship>::iterator enemy = spaceshipEnemies.begin();
+	while (enemy != spaceshipEnemies.end())
 	{
-		enemy->x -= 0.2;
+		enemy->x -= 2;
 
-		if(enemy->x < 0){
-			positions.push_back(i);
+		if (enemy->x < 0){
+			enemy = spaceshipEnemies.erase(enemy);
 		}
-
-		i++;
-	}
-
-	for (int i = 0; i < positions.size(); i++)
-	{
-		spaceshipEnemies.erase(spaceshipEnemies.begin() + positions[i]);
+		else{
+			++enemy;
+		}
 	}
 
 }
@@ -385,28 +388,22 @@ void UpdateGoal()
 		goal->x -= goal->moveSpeed;
 }
 
+
 void Update(void)
 {
-	timeline += 1;
+	deltatime = GetDeltatime();
 
-	if(stateInitialAnimation == false){
-		if(timeline % 25000 == 0 && timeline < 50000){
-			// cout << timeline / 100 << endl;
+	if(stateInitialAnimation == false && enemiesCreated == false){
+		if(deltatime < 12){
+			enemiesCreated = true;
 			CreateEnemies(10);
 		}
 	}
 
-	if(timeline == 25000){
+	if(deltatime == 18){
 		CreateGoal();
 		goalCreated = true;
 	}
-
-	/*for (int i = 0; i < spaceshipEnemies.size(); i++)
-	{
-		if(spaceshipEnemies[i].x < MIDDLE_X){
-			cout << timeline << endl;
-		}
-	}*/
 
 	if(goalCreated == true)
 		UpdateGoal();
@@ -419,6 +416,8 @@ void Update(void)
 
 void Draw(void)
 {
+	glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	
@@ -455,11 +454,20 @@ void Draw(void)
 
 void Display(void)
 {
-	Update();
 	Draw();
 	
-	glFlush();
-	glutPostRedisplay();
+	glutSwapBuffers();
+}
+
+
+void Timer(int value)
+{
+	
+	Update();
+       
+    // Redesenha o quadrado com as novas coordenadas 
+    glutPostRedisplay();
+    glutTimerFunc(33, Timer, 1);
 }
 
 
@@ -480,6 +488,8 @@ void Keyboard (unsigned char key, int x, int y)
 	if (key == 27)
 		exit(0);
 
+	cout << GLUT_KEY_DOWN << GLUT_KEY_UP << endl;
+
 	UpdateKeyEnemies();
 	UpadateKeySpaceshipPlayer(key);
 }
@@ -495,13 +505,17 @@ void Joystick(unsigned int buttonMask, int x, int y, int z)
 	CollisionGoal();
 }
 
-// Função responsável por inicializar parâmetros e variáveis
-void Initialize (void)
-{   
 
+void Initialize (void)
+{
 	// Define a cor de fundo da janela de visualização como branca
 	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
+	timeline = clock();
+
+	CreateStars();
+	CreateSpaceshipPlayer();
+	StarsGotoLightSpeed();
 }
 
 
@@ -509,15 +523,11 @@ int main(void)
 {
 	srand (time(NULL));
 
-	CreateStars();
-	CreateSpaceshipPlayer();
-	StarsGotoLightSpeed();
-
 	// Define do modo de operação da GLUT
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
 	// Especifica a posição inicial da janela GLUT
-	glutInitWindowPosition(5,5); 
+	glutInitWindowPosition(5, 5);
 
 	// Especifica o tamanho inicial em pixels da janela GLUT
 	glutInitWindowSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -535,6 +545,8 @@ int main(void)
 	glutKeyboardFunc (Keyboard);
     
 	glutJoystickFunc(Joystick, 10);
+
+	glutTimerFunc(33, Timer, 1);
 
 	// Chama a função responsável por fazer as inicializações 
 	Initialize();
